@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<cities>
+    <city name = "北京市">
+        <area>东城区</area>
+        <area>西城区</area>
+        <area>朝阳区</area>
+        <area>海淀区</area>
+        <area>昌平区</area>
+    </city>
+</cities>

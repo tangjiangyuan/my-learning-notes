@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE persons SYSTEM 'D:\Dev-work\java_advanced\day19\src\com\java_learn\p3_xml\dtd\stus.dtd'>
+
+<persons>
+    <person>
+        <name></name>
+        <age></age>
+    </person>
+</persons>

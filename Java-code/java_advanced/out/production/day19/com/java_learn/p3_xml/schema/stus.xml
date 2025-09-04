@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!-- 单个schema 引入-->
+<!--
+    <students xmlns="http://www.briup.com">
+        <student>
+            <name>张三</name>
+            <age>23</age>
+        </student>
+    </students>
+-->
+
+<!-- 多个xml引入 -->
+<!-- xmlns:xsi 给xmlns起别名，因为xmlns只能有一个 -->
+<!-- XMLSchema-instance 是 XMLSchema的上层约束-->
+<students xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xmlns="http://www.briup.com"
+          xsi:schemaLocation="http://www.briup.com stus.xsd"
+>
+    <student id = "1">
+        <name>张三</name>
+        <age>23</age>
+    </student>
+    <student id="2">
+        <name>张三</name>
+        <age>23</age>
+    </student>
+
+</students>
