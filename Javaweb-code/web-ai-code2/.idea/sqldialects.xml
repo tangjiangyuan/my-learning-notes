@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="SqlDialectMappings">
+    <file url="file://$PROJECT_DIR$/tlias-web-management/src/main/resources/com/tjy/mapper/ClazzMapper.xml" dialect="MySQL" />
+    <file url="file://$PROJECT_DIR$/tlias-web-management/src/main/resources/com/tjy/mapper/EmpExprMapper.xml" dialect="GenericSQL" />
+    <file url="file://$PROJECT_DIR$/tlias-web-management/src/main/resources/com/tjy/mapper/EmpMapper.xml" dialect="CassandraQL" />
+    <file url="file://$PROJECT_DIR$/tlias-web-management/src/main/resources/com/tjy/mapper/StudentMapper.xml" dialect="MySQL" />
+  </component>
+</project>

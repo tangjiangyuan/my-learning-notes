@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tjy.mapper.StudentMapper">
+
+    <!--统计各个班级的学员数量-->
+    <select id="getStuNumber" resultType="java.util.Map">
+        select c.name clazzName, a.stu_count stuCount
+        from clazz c, (select clazz_id, count(*) stu_count from student group by clazz_id) a
+        where c.id = a.clazz_id
+    </select>
+
+    <!--统计学员学历信息-->
+    <select id="countStudentDegree" resultType="java.util.Map">
+        select
+            (case when degree = 1 then '初中'
+                  when degree = 2 then '高中'
+                  when degree = 3 then '大专'
+                  when degree = 4 then '本科'
+                  when degree = 5 then '硕士'
+                  when degree = 6 then '博士'
+                  else '' end) as name,
+            count(*) as value
+        from student group by degree;
+    </select>
+
+    <!--通过id修改学员的违纪分数-->
+    <update id="handleViolation">
+        update student set violation_count = #{count} ,violation_score = #{score} where id = #{id}
+    </update>
+
+    <!--根据ID删除学员-->
+    <delete id="deleteById">
+        delete from student where id in
+        <foreach collection="ids" item="id" separator="," open="(" close=")">
+            #{id}
+        </foreach>
+    </delete>
+
+    <!--修改学员信息-->
+    <update id="update">
+        update student
+        <set>
+            <if test="name != null and name != ''">name = #{name},</if>
+            <if test="no != null and no != ''">no = #{no},</if>
+            <if test="gender != null">gender = #{gender},</if>
+            <if test="phone != null and phone != ''">phone = #{phone},</if>
+            <if test="degree != null">degree = #{degree},</if>
+            <if test="idCard != null and idCard != ''">id_card = #{idCard},</if>
+            <if test="isCollege != null and isCollege != ''">is_college = #{isCollege},</if>
+            <if test="address != null and address != ''">address = #{address},</if>
+            <if test="graduationDate != null">graduation_date = #{graduationDate},</if>
+            <if test="violationCount != null">violation_count = #{violationCount},</if>
+            <if test="violationScore != null">violation_score = #{violationScore},</if>
+            <if test="clazzId != null">clazz_id = #{clazzId}</if>
+        </set>
+        where id = #{id}
+    </update>
+
+    <!--根据ID查询学员信息-->
+    <select id="getById" resultType="com.tjy.pojo.Student">
+        select s.*, c.name clazzName from student s left join clazz c on s.clazz_id = c.id where s.id = #{id}
+    </select>
+
+    <!--添加学员-->
+    <insert id="insert" useGeneratedKeys="true" keyProperty="id">
+        insert into student(name, no, gender, phone, id_card, is_college, address, degree, graduation_date, clazz_id, create_Time, update_time)
+        values (#{name}, #{no}, #{gender}, #{phone}, #{idCard}, #{isCollege}, #{address}, #{degree}, #{graduationDate}, #{clazzId}, #{createTime}, #{updateTime})
+    </insert>
+
+    <!--分页查询学员信息-->
+    <select id="page" resultType="com.tjy.pojo.Student">
+        select s.*, c.name clazzName from student s left join clazz c on c.id = s.clazz_id
+        <where>
+            <if test="name != null and name != ''">
+                and s.name like concat('%', #{name}, '%')
+            </if>
+            <if test="degree != null">
+                and s.degree = #{degree}
+            </if>
+            <if test="classId != null">
+                and s.class_id = #{classId}
+            </if>
+        </where>
+        order by s.update_time desc
+    </select>
+</mapper>
