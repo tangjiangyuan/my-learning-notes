@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Environment>
+    <Gather class="com.tjy.service.impl.client.GatherImpl">
+        <!--读取文件的路径 -->
+        <path>test-data</path>
+        <gatherBackup>test-data-gather-backup.txt</gatherBackup>
+    </Gather>
+
+    <Client class="com.tjy.service.impl.client.ClientImpl">
+        <ip>127.0.0.1</ip>
+        <port>10000</port>
+    </Client>
+
+    <Server class="com.tjy.service.impl.server.ServerImpl">
+        <port>10000</port>
+    </Server>
+
+    <DBStore class="com.tjy.service.impl.server.DBStoreImpl">
+        <batchSize>1000</batchSize>
+        <dbBackup>test-data-db-backup.txt</dbBackup>
+    </DBStore>
+    <Backup class="com.tjy.util.impl.BackupImpl">
+
+    </Backup>
+    <!--<Log class="com.tjy.util.LogImpl">
+        <log4j-properties>
+            src/main/resources/log4j.properties
+        </log4j-properties>
+    </Log>-->
+</Environment>
